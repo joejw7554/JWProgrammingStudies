@@ -1,7 +1,7 @@
 ﻿//using System;
 //using System.Collections.Generic;
 
-//public class Solution
+//public class StackQueue
 //{
 //    public bool solution(string s) //단순 스택만 이용해서 풀기
 //    {
@@ -45,7 +45,7 @@
 //        if (stack.Count > 0) return false; //아직도 스택에 남아있다는건 짝이 안맞다는뜻
 
 
-//        return true; 
+//        return true;
 //    }
 
 //    public bool solution2(string s)  //Dictionary<char, char>를 사용해 짝을 미리 정의하여 풀어보기
@@ -57,11 +57,11 @@
 //            {'{', '}' }
 //        };
 
-//        var stack= new Stack<char>();
+//        var stack = new Stack<char>();
 
 //        foreach (var item in s)
 //        {
-//            if(item=='(' || item == '['|| item == '{')
+//            if (item == '(' || item == '[' || item == '{')
 //            {
 
 //            }
@@ -76,11 +76,11 @@
 //}
 
 
-//class Test
+//class StackQueueTest
 //{
 //    static void Main(string[] args)
 //    {
-//        Solution sol = new Solution();
+//        StackQueue sol = new StackQueue();
 
 //        // 테스트 케이스들
 //        string[] testCases = {
