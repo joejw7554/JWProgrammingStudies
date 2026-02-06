@@ -1,78 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//using System;
+//using System.Collections.Generic;
 
-public class DijkstraBasic
-{
-    public void RunDijkstra()
-    {
-        int count = 10;
+//public class Solution
+//{
 
-        List<(int target,int cost)>[] adj = new List<(int target, int cost)>[count+1];
+//    public int solution(int n, int m, int startLevel, int[] bossLocation, int bossLevel, int[,] map)
+//    {
+//        int answer = 0;
 
-        // adj 리스트 초기화 및 임의 데이터 추가
-        for (int i = 0; i <= count; i++)
-        {
-            adj[i] = new List<(int target, int cost)>();
-        }
-
-        // 임의의 간선 추가
-        adj[1].Add((2, 5));
-        adj[1].Add((3, 3));
-        adj[2].Add((3, 2));
-        adj[2].Add((4, 6));
-        adj[3].Add((4, 7));
-        adj[3].Add((5, 4));
-        adj[4].Add((5, 1));
-        adj[4].Add((6, 8));
-        adj[5].Add((6, 3));
-        adj[6].Add((7, 2));
-        adj[7].Add((8, 4));
-        adj[8].Add((9, 1));
-        adj[9].Add((10, 5));
-
-        int[] result =CalculateDijkstra(1, count, adj);
+//        // [문제 정의 요약]
+//        // 1. 이동: 상하좌우 1칸 (1시간 소모, 이동하려는 곳의 L <= 현재레벨 P 일 때만 가능)
+//        // 2. 사냥: 현재 칸에서 사냥 (1시간 소모, 레벨 상승)
+//        //    - L <= P/4 : 레벨 +1
+//        //    - P/4 < L <= P/2 : 레벨 +2
+//        //    - P/2 < L <= P : 레벨 +3
+//        // 3. 목표: 보스 위치에 도달하여 현재 레벨이 bossLevel 이상이 되는 최소 시간
 
 
-        for(int i=1; i< adj.Length; i++)
-        {
-            Console.WriteLine($"Target:{i}, Cost:{result[i]}");
-        }
-    }
 
-    public int[] CalculateDijkstra(int start, int count, List<(int target, int cost)>[] adj)
-    {
+//        return answer;
+//    }
 
-        int[] map = new int[count+1];
-        Array.Fill(map, int.MaxValue);
+//    // 테스트 실행을 위한 예시 Main
+//    public static void Main()
+//    {
+//        Solution sol = new Solution();
 
-        var pq = new PriorityQueue<int , int>();
-        map[start] = 0;
-        pq.Enqueue(1, 0);
-        while(pq.Count>0)
-        {
-            if (!pq.TryDequeue(out int currrentID, out int currentCost)) break;
+//        int n = 3;
+//        int m = 3;
+//        int startLevel = 1;
+//        int[] bossLocation = { 3, 3 };
+//        int bossLevel = 10;
+//        int[,] map = {
+//            {0, 2, 0},
+//            {1, 5, 0},
+//            {0, 8, 0}
+//        };
 
-            if (currentCost > map[currrentID]) continue;
-
-            foreach (var node in adj[currrentID])
-            {
-                int nextID = node.target;
-                int nextCost = node.cost+ currentCost;
-
-                if (nextCost < map[nextID])
-                {
-                    pq.Enqueue(nextID, nextCost);
-                    map[nextID] = nextCost;
-                }
-
-            }
-        }
-
-        return map;
-    }
-
-    public static void Main()
-    {
-        new DijkstraBasic().RunDijkstra();
-    }
-}
+//        // 실제 문제의 map 데이터 형식에 따라 인덱스 조정이 필요할 수 있습니다 (0-based vs 1-based)
+//        int result = sol.solution(n, m, startLevel, bossLocation, bossLevel, map);
+//        Console.WriteLine($"최소 소요 시간: {result}");
+//    }
+//}
