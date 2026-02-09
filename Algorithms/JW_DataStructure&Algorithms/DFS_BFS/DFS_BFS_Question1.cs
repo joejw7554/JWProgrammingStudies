@@ -69,7 +69,7 @@
 //                moveCount = currentLoc.count;
 
 //                //3가지 조건
-//                bool bOverLimit = (nextRow <0 || nextRow >= row) || (nextCol <0 || nextCol >= col); //Index 범위 내인가?
+//                bool bOverLimit = (nextRow < 0 || nextRow >= row) || (nextCol < 0 || nextCol >= col); //Index 범위 내인가?
 //                if (!bOverLimit)
 //                {
 //                    bool bVisited = visited[nextRow, nextCol] == true; //방문을 한적이 있는가?
@@ -88,7 +88,7 @@
 //                i++; //횟수 증가
 //            }
 
-//            if(!bHasPushed)//아무것도 push 못했다는건 막다른길이라는뜻이니
+//            if (!bHasPushed)//아무것도 push 못했다는건 막다른길이라는뜻이니
 //            {
 //                break;
 //            }
