@@ -12,46 +12,49 @@
 //    public int solution(int[] numbers, int target)
 //    {
 //        ////DFS
-//        //Stack<(int ,int )> stack = new Stack<(int,int)>(); //currentIndex ,Sum
+//        Stack<(int, int)> stack = new Stack<(int, int)>(); //currentIndex ,Sum
 
-//        //stack.Push((0, 0));
+//        stack.Push((0, 0));
 
-//        //while (stack.Count > 0)
-//        //{
-//        //    (int currentIndex,int currentSum) pop = stack.Pop();
+//        while (stack.Count > 0)
+//        {
+
+//            (int currentIndex, int currentSum) pop = stack.Pop();
 
 
-//        //    if (pop.currentIndex < numbers.Length)
-//        //    {
-//        //        stack.Push((pop.currentIndex + 1, pop.currentSum + numbers[pop.currentIndex]));
-//        //        stack.Push((pop.currentIndex + 1, pop.currentSum - numbers[pop.currentIndex]));
-//        //    }
-//        //    else
-//        //    {
-//        //        if (pop.currentSum == target) answer++;
-//        //        continue;
-//        //    }
-//        //}
+//            if (pop.currentIndex < numbers.Length)
+//            {
+//                stack.Push((pop.currentIndex + 1, pop.currentSum + numbers[pop.currentIndex]));
+//                stack.Push((pop.currentIndex + 1, pop.currentSum - numbers[pop.currentIndex]));
+//            }
+//            else
+//            {
+//                if (pop.currentSum == target) answer++;
+//                continue;
+
+//            }
+//        }
+
 
 //        //BFS
-//        Queue<(int, int)> queue = new Queue<(int, int)>(); //index, sum
+//        //Queue<(int, int)> queue = new Queue<(int, int)>(); //index, sum
 
-//        queue.Enqueue((0, 0));
+//        //queue.Enqueue((0, 0));
 
-//        while (queue.Count > 0)
-//        {
-//            (int index, int sum) pop = queue.Dequeue();
+//        //while (queue.Count > 0)
+//        //{
+//        //    (int index, int sum) pop = queue.Dequeue();
 
-//            if (pop.index == numbers.Length)
-//            {
-//                if (pop.sum == target) answer++;
+//        //    if (pop.index == numbers.Length)
+//        //    {
+//        //        if (pop.sum == target) answer++;
 
-//                continue;
-//            }
+//        //        continue;
+//        //    }
 
-//            queue.Enqueue((pop.index + 1, pop.sum + numbers[pop.index]));
-//            queue.Enqueue((pop.index + 1, pop.sum - numbers[pop.index]));
-//        }
+//        //    queue.Enqueue((pop.index + 1, pop.sum + numbers[pop.index]));
+//        //    queue.Enqueue((pop.index + 1, pop.sum - numbers[pop.index]));
+//        //}
 
 
 
@@ -66,9 +69,9 @@
 //        Solution sol = new Solution();
 
 //        Console.WriteLine("=== 테스트 케이스 1 (프로그래머스 예제 1) ===");
-//        int result1 = sol.solution(new int[] { 1, 1, 1, 1, 1 }, 3);
-//        Console.WriteLine($"입력: [1, 1, 1, 1, 1], target: 3");
-//        Console.WriteLine($"출력: {result1}, 예상: 5\n");
+//        int result1 = sol.solution(new int[] { 1, 1, 1}, 1);
+//        Console.WriteLine($"입력: [1, 1, 1], target: 3");
+//        Console.WriteLine($"출력: {result1}, 예상: 3 \n");
 
 //        Console.WriteLine("=== 테스트 케이스 2 (프로그래머스 예제 2) ===");
 //        sol.answer = 0;
