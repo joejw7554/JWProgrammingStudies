@@ -1,33 +1,53 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 
-// ¹®Á¦: ¹è¿­¿¡¼­ ÇÕÀÌ Á¤È®È÷ TargetÀÌ µÇ´Â ¸ğµç ºÎºĞÁıÇÕ Ã£±â
-// ¿¹: [1,2,3,4,5], target=5 ¡æ {1,4}, {2,3}, {5}
+// ë¬¸ì œ: ë°°ì—´ì—ì„œ í•©ì´ ì •í™•íˆ Targetì´ ë˜ëŠ” ëª¨ë“  ë¶€ë¶„ì§‘í•© ì°¾ê¸°
+// ì˜ˆ: [1,2,3,4,5], target=5 â†’ {1,4}, {2,3}, {5}
 
 namespace TestC_Proj.BackTracking
 {
     class Step3_SubsetSum
     {
-        // TODO: ÇÊ¿äÇÑ º¯¼ö ¼±¾ğ
+        // TODO: í•„ìš”í•œ ë³€ìˆ˜ ì„ ì–¸
+        static List<int> selected = new List<int>();
+
 
         static void SubsetSum(int[] arr, int index, int currentSum, int target)
         {
-            // TODO: ¹éÆ®·¡Å·À¸·Î ºÎºĞÁıÇÕ ÇÕ ±¸Çö
-            // ÈùÆ®:
-            // 1. Á¾·á Á¶°Ç: currentSum == target (Ãâ·Â)
-            // 2. °¡ÁöÄ¡±â: currentSum > target (Á¾·á)
-            // 3. °¢ ¿ø¼Ò¸¶´Ù 2°¡Áö ¼±ÅÃ: Æ÷ÇÔ or Á¦¿Ü
+
+
+            // TODO: ë°±íŠ¸ë˜í‚¹ìœ¼ë¡œ ë¶€ë¶„ì§‘í•© í•© êµ¬í˜„
+            // íŒíŠ¸:
+            // 1. ì¢…ë£Œ ì¡°ê±´: currentSum == target (ì¶œë ¥)
+            // 2. ê°€ì§€ì¹˜ê¸°: currentSum > target (ì¢…ë£Œ)
+            // 3. ê° ì›ì†Œë§ˆë‹¤ 2ê°€ì§€ ì„ íƒ: í¬í•¨ or ì œì™¸
+
+            //ë§Œì•½ target ì˜ ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ ì¡°ê¸° ì¢…ë£Œ
+            if (currentSum == target)
+            {
+                Console.WriteLine(string.Join(',', selected));
+                return;
+            }
+
+            if (index >= arr.Length || currentSum > target) return;
+
+            selected.Add(arr[index]);  // í¬í•¨
+            SubsetSum(arr, index + 1, currentSum + arr[index], target);
+            selected.RemoveAt(selected.Count - 1);
+
+            SubsetSum(arr, index + 1, currentSum, target);  // ì œì™¸ (ì‹¤í–‰ ì•ˆ ë¨)
         }
 
         static void Main()
         {
-            Console.WriteLine("=== ºÎºĞÁıÇÕ ÇÕ ¹®Á¦ ===");
+            Console.WriteLine("=== ë¶€ë¶„ì§‘í•© í•© ë¬¸ì œ ===");
             int[] arr = { 1, 2, 3, 4, 5 };
             int target = 5;
 
-            Console.WriteLine($"¹è¿­: [{string.Join(", ", arr)}]");
-            Console.WriteLine($"¸ñÇ¥ ÇÕ: {target}");
-            Console.WriteLine("°á°ú:");
+            Console.WriteLine($"ë°°ì—´: [{string.Join(", ", arr)}]");
+            Console.WriteLine($"ëª©í‘œ í•©: {target}");
+            Console.WriteLine("ê²°ê³¼:");
             SubsetSum(arr, 0, 0, target);
         }
     }
