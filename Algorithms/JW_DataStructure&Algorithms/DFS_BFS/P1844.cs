@@ -9,10 +9,15 @@
 
 //namespace TestC_Proj.DFS_BFS
 //{
+  
 //    class Solution
 //    {
-//        bool[,] visited;
 
+//        static bool[,] visited;
+//        static int answer = int.MaxValue;
+
+//        static int[] dx = [1, 0, -1, 0];
+//        static int[] dy = [0, 1, 0, -1];
 //        public int solution(int[,] maps)
 //        {
 
@@ -22,41 +27,76 @@
 //            visited = new bool[maxRow, maxCol];
 //            visited[0, 0] = true;
 
-//            ////BFS
-//            //int[] dx = new int[] { 1, 0, -1, 0 };
-//            //int[] dy = new int[] { 0, 1, 0, -1 };
+//            //BFS
+//            int[] dx = new int[] { 1, 0, -1, 0 };
+//            int[] dy = new int[] { 0, 1, 0, -1 };
 
-//            //Queue<(int, int, int)> queue = new Queue<(int, int, int)>();
-//            //queue.Enqueue((0, 0, 1));
+//            Queue<(int, int, int)> queue = new Queue<(int, int, int)>();
+//            queue.Enqueue((0, 0, 1));
 
-//            //while (queue.Count > 0)
-//            //{
-//            //    //꺼내고 방문처리
-//            //    (int row, int col, int distance) = queue.Dequeue();
+//            while (queue.Count > 0)
+//            {
+//                //꺼내고 방문처리
+//                (int row, int col, int distance) = queue.Dequeue();
 
-//            //    //목표지점 도착하면 조기종료
-//            //    if (row == maxRow - 1 && col == maxCol - 1) return distance;
-
-
-//            //    //해당 구역에서 모든 방향을 탐색한다
-//            //    for (int i = 0; i < dx.Length; i++)
-//            //    {
-//            //        int nextR = row + dy[i];
-//            //        int nextC = col + dx[i];
-
-//            //        //Index 이내인가
-//            //        if (IsVaild(nextR, nextC, maxRow, maxCol) && IsPath(nextR, nextC, maps) && visited[nextR, nextC] == false)
-//            //        {
-//            //            visited[nextR, nextC] = true;
-//            //            queue.Enqueue((nextR, nextC, distance + 1));
-//            //        }
-//            //    }
-//            //}
+//                //목표지점 도착하면 조기종료
+//                if (row == maxRow - 1 && col == maxCol - 1) return distance;
 
 
+//                //해당 구역에서 모든 방향을 탐색한다
+//                for (int i = 0; i < dx.Length; i++)
+//                {
+//                    int nextR = row + dy[i];
+//                    int nextC = col + dx[i];
 
-//            return -1;
+//                    //Index 이내인가
+//                    if (IsVaild(nextR, nextC, maxRow, maxCol) && IsPath(nextR, nextC, maps) && visited[nextR, nextC] == false)
+//                    {
+//                        visited[nextR, nextC] = true;
+//                        queue.Enqueue((nextR, nextC, distance + 1));
+//                    }
+//                }
+//            }
+
+
+//            int n = maps.GetLength(0);
+
+
+//            visited[0, 0] = true;
+//            NextPath(0, 0, 1, maps, n);
+
+//            if (answer == int.MaxValue) answer = -1;
+
+//            return answer;
 //        }
+
+//        static bool IsValid(int row, int col, int n)
+//        {
+//            return row >= 0 && row < n && col >= 0 && col < n;
+//        }
+
+//        static void NextPath(int row, int col, int dist, int[,] maps, int n)
+//        {
+//            if (row == n - 1 && col == n - 1)
+//            {
+//                answer = int.Min(answer, dist);
+//                return;
+//            }
+
+//            for (int i = 0; i < dx.Length; i++)
+//            {
+//                int nextR = row + dy[i];
+//                int nextC = col + dx[i];
+
+//                if (IsValid(nextR, nextC, n) && visited[nextR, nextC] == false && maps[nextR, nextC] == 1)
+//                {
+//                    visited[nextR, nextC] = true;
+//                    NextPath(nextR, nextC, dist + 1, maps, n);
+//                    visited[nextR, nextC] = false;
+//                }
+//            }
+//        }
+            
 
 //        static bool IsVaild(int row, int col, int maxRow, int maxCol)
 //        {
