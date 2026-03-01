@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 
 //https://school.programmers.co.kr/learn/courses/30/lessons/42861
-public class P_42861_ReviewRequired
+public class P_42861_R
 {
 
     public int solution(int n, int[,] costs)
@@ -17,7 +17,7 @@ public class P_42861_ReviewRequired
 
     static void Main()
     {
-        var solution = new P_42861_ReviewRequired();
+        var solution = new P_42861_R();
 
         // 테스트 1: 프로그래머스 기본 예제
         int[,] costs1 = new int[,] 
