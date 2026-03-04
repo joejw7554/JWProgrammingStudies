@@ -1,39 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-//https://www.acmicpc.net/problem/1541
-class B_1541
-{
-    static void Main()
-    {
-        string input = Console.ReadLine();
+////https://www.acmicpc.net/problem/1541
+//class B_1541
+//{
+//    static void Main()
+//    {
+//        string input = Console.ReadLine();
 
-        string[] separated = input.Split('-');
-
-
-        int sum = Sum(separated[0]);
+//        string[] separated = input.Split('-');
 
 
-        for (int i = 1; i < separated.Length; i++)
-        {
-            sum -= Sum(separated[i]);
-        }
+//        int sum = Sum(separated[0]);
 
-        Console.WriteLine(sum);
 
-    }
+//        for (int i = 1; i < separated.Length; i++)
+//        {
+//            sum -= Sum(separated[i]);
+//        }
 
-    static int Sum(string group)
-    {
-        int sum = 0;
-        var numbers = group.Split('+');
+//        Console.WriteLine(sum);
 
-        foreach (var number in numbers)
-        {
-            sum += int.Parse(number);
-        }
-        return sum;
-    }
-}
+//    }
+
+//    static int Sum(string group)
+//    {
+//        int sum = 0;
+//        var numbers = group.Split('+');
+
+//        foreach (var number in numbers)
+//        {
+//            sum += int.Parse(number);
+//        }
+//        return sum;
+//    }
+//}
 
