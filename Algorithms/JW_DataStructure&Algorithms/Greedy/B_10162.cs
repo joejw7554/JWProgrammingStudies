@@ -2,13 +2,13 @@
 //using System.Collections.Generic;
 //using System.Text;
 
-////https://www.acmicpc.net/problem/10162
+//https://www.acmicpc.net/problem/10162
 //class B_10162
 //{
 //    static void Main()
 //    {
 //        var input = int.Parse(Console.ReadLine());
-    
+
 
 //        int A = 300;
 //        int B = 60;
