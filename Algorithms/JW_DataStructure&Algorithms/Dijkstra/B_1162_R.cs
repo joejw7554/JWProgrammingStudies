@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 //https://www.acmicpc.net/problem/1162
-class B_1162
+class B_1162_R
 {
     static void Main()
     {
