@@ -10,9 +10,9 @@
 //    static void Main()
 //    {
 //        string test = @"3 310
+//200 150
 //50 40
-//100 70
-//200 150";
+//100 70";
 
 //        StringReader reader = new StringReader(test);
 //        //StreamReader reader = new StreamReader(Console.OpenStandardInput());
