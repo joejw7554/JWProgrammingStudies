@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="JWCppAlgorithm/JWCppAlgorithm.vcxproj" />
+  <Project Path="JWCppAlgorithm/JWCppAlgorithm.vcxproj" Id="4711df2f-0ecc-46b8-bc87-6fa759670669" />
 </Solution>
