@@ -12,12 +12,8 @@
 
 //        for (int i = 0; i < sizes.GetLength(0); i++)
 //        {
-//            int currentMax = Math.Max(sizes[i, 0], sizes[i, 1]);
-//            int currentMin = Math.Min(sizes[i, 0], sizes[i, 1]);
-
-//            maxWidth = Math.Max(currentMax, maxWidth);
-//            maxHeight = Math.Max(currentMin, maxHeight);
-
+//            maxWidth = Math.Max(maxWidth, Math.Max(sizes[i, 0], sizes[i, 1]));
+//            maxHeight = Math.Max(maxHeight, Math.Max(sizes[i, 0], sizes[i, 1]));
 //        }
 
 //        int answer = maxWidth * maxHeight;
