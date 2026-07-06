@@ -11,71 +11,93 @@ public class P_42579
     {
 
         List<int> answer = new List<int>();
-        //풀이 방향
+        //2개식 모아 선정
 
-        //결국엔 결과는 재생된 횟수가 가장 높은 순서대로 정렬하되 재생 순서가 같다면 고유번호가 낮은거부터 먼저 정렬하라는 예외사항인거네?
+        //속한 노래가 많이 재생된 장르 먼저 수록
 
-        //그럼 Dict에서 <string,KeyValuePair<ID, PlayTime> = <장르, <ID, 재생된횟수>> 이런식으로 한다면 Category별로 묶을 수도있고 각각 고유 ID의 재생시간도 알 수 있겠네
+        //장르내 많이 재생된 노래 2개 수록
 
-        var comparer = Comparer<(int play, int id)>.Create((x, y) =>
+
+        //장르별로 어떤게 많이 재생됐는지 알아야함
+        var genreSum = new Dictionary<string, int>();
+
+        //재생 횟수가 같으면 고유 번호가 낮은 노래 먼저 수록(예외처리)
+        var comparer = Comparer<(int count, int ID)>.Create((a, b) =>
         {
-            if (x.play == y.play)
+            if (a.count == b.count)
             {
-                return x.id.CompareTo(y.id);
+                return a.ID.CompareTo(b.ID);
             }
-            return y.play.CompareTo(x.play);
+
+            return b.count.CompareTo(a.count);
         });
 
-        var ranks = new Dictionary<string, SortedSet<(int play, int id)>>();
-        var genrePlaySum = new Dictionary<string, int>();
 
-        //음 여기서 이거에 대한 예외처리 해야할꺼같은데 :장르 내에서 재생 횟수가 같은 노래 중에서는 고유 번호가 낮은 노래를 먼저 수록합니다
+        //장르별로 재생된 노래를 기준으로 정렬하고 ID도 알아야함
+        var genreList = new Dictionary<string, SortedSet<(int count, int id)>>();
 
         for (int i = 0; i < genres.Length; i++)
         {
-            string genre = genres[i];
             int ID = i;
-            int playCount = plays[i];
+            int count = plays[i];
+            string category = genres[i];
 
+            //장르별로 누적합 계산
+            genreSum.TryGetValue(category, out int current);
+            genreSum[category] = current + count;
 
-            genrePlaySum.TryGetValue(genre, out int current);
-            genrePlaySum[genre] = current + playCount;
-
-            if (!ranks.ContainsKey(genre))
+            //장르별로 각 재생 횟수 ID 정리
+            if (!genreList.ContainsKey(category))//만약 새로운 장르이고 SortedSet 초기화가 안되었다면 초기화
             {
-                ranks[genre] = new SortedSet<(int play, int id)>(comparer);
+                genreList[category] = new SortedSet<(int count, int id)>(comparer);
             }
 
-            ranks[genre].Add((playCount, ID));
+            genreList[category].Add((count, ID));
         }
 
-        var sortedGenres = genrePlaySum.OrderByDescending(x => x.Value).Select(x => x.Key);
+        var orderedGenre = genreSum.OrderByDescending(x => x.Value).Select(x => x.Key);
 
-        foreach (var genre in sortedGenres)
+        foreach (var genre in orderedGenre)
         {
-            foreach (var song in ranks[genre].Take(2))
+            var twoSongs = genreList[genre].Take(2).ToArray();
+
+            foreach (var item in twoSongs)
             {
-                answer.Add(song.id);
+                answer.Add(item.id);
             }
+
         }
-
-
-
-        //이제 여기서 정렬을 해서 출력해야겠지
-
-        //rank 에서 가장 많이 수록된 장르가 무엇인지 찾아야겠네 어? 생각해보니 리스트여야겠네 여러개 저장해야되잖아? => 여기서 리스트로 반영한 아이디어 생각해냄
-
-        //잠깐 근데 재생횟수가 모두 다르다했고 내가 정렬해야할때는 재생횟수 순으로 해야하니까 ID 순이나이라 (재생횟수, ID)이게 더 효율적이겠네 그리고 정렬을 해주는 자료구조를 써야겠네 orderedSet같은거
-        //List에서 SortedSet으로 바꾸고 playCount위주로 정렬되도록 반영
-
-
-        //이렇게해도 여전히 내가 Dict에서 장르별로 몇개인지 확인해서 Max를 찾아야하는건가
-        //이렇게하면 정렬도 되고 몇개인지 확인 가능하니 순서대로 다 하나씩 answer에 추가하면 되는거겠네?
-
-
-
 
         return answer.ToArray();
+
+
+        ////더 효율적인 방법
+
+        //var sum = new Dictionary<string, int>();
+        //var top = new Dictionary<string, List<int>>(); // 장르 -> 상위 곡 인덱스 최대 2개
+
+        //for (int i = 0; i < genres.Length; i++)
+        //{
+        //    string g = genres[i];
+
+        //    sum.TryGetValue(g, out int s);
+        //    sum[g] = s + plays[i];
+
+        //    if (!top.ContainsKey(g)) top[g] = new List<int>();
+        //    var list = top[g];
+
+        //    list.Add(i);
+        //    // 원소가 최대 3개뿐이라 이 정렬은 사실상 O(1)
+        //    list.Sort((a, b) =>
+        //        plays[a] != plays[b] ? plays[b].CompareTo(plays[a]) : a.CompareTo(b));
+        //    if (list.Count > 2) list.RemoveAt(2); // 3등은 버림
+        //}
+
+        //var answer = new List<int>();
+        //foreach (var g in sum.OrderByDescending(x => x.Value).Select(x => x.Key))
+        //    answer.AddRange(top[g]);
+
+        //return answer.ToArray();
     }
 
     static void Main()
